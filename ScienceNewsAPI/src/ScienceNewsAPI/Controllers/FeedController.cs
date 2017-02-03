@@ -2,8 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http;
+using Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
+using NuGet.Protocol.Core.v3;
+using ScienceNewsAPI.Data;
 
 namespace ScienceNewsAPI.Controllers
 {
@@ -13,19 +19,42 @@ namespace ScienceNewsAPI.Controllers
         private ILogger<FeedController> _logger;
         private NewsRepository _repo;
 
-        // GET api/feed/Index
-        [HttpGet]
-        public JsonResult Index()
+        public FeedController(NewsRepository repo, ILogger<FeedController> logger)
         {
-          var links =  _repo.GetAll();
-            return Json(links);
+            _repo = repo;
+            _logger = logger;
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        // GET api/feed/Index
+        [HttpGet]
+        public async Task<IActionResult> IndexAsync()
         {
-            return "value";
+            try
+            {
+                var links = _repo.GetAll();
+                return Ok(await links.ToListAsync()); // 200 response
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to get all links: {ex.Message}");
+                return new ExceptionResult(ex, true) { StatusCode = 204 };
+            }
+        }
+
+        // GET api/feed/Index/title
+        [HttpGet("{title}")]
+        public async Task<IActionResult> Index(string title)
+        {
+            try
+            {
+                var news = await _repo.GetSingle(title);
+                return Ok(news);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to get link with title {title} due to: {ex.Message}");
+                return new ExceptionResult(ex, true) { StatusCode = 204 };
+            }
         }
 
         // POST api/values

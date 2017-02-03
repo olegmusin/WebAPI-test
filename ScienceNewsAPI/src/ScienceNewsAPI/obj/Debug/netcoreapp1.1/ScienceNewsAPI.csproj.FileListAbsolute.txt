@@ -1,0 +1,11 @@
+C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\bin\Debug\netcoreapp1.1\Microsoft.DiaSymReader.Native.x86.dll
+C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\bin\Debug\netcoreapp1.1\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\bin\Debug\netcoreapp1.1\ScienceNewsAPI.deps.json
+C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\bin\Debug\netcoreapp1.1\ScienceNewsAPI.runtimeconfig.json
+C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\bin\Debug\netcoreapp1.1\ScienceNewsAPI.runtimeconfig.dev.json
+C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\bin\Debug\netcoreapp1.1\ScienceNewsAPI.dll
+C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\bin\Debug\netcoreapp1.1\ScienceNewsAPI.pdb
+C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\obj\Debug\netcoreapp1.1\ScienceNewsAPI.csprojResolveAssemblyReference.cache
+C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\obj\Debug\netcoreapp1.1\ScienceNewsAPI.AssemblyInfo.cs
+C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\obj\Debug\netcoreapp1.1\ScienceNewsAPI.dll
+C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\obj\Debug\netcoreapp1.1\ScienceNewsAPI.pdb
