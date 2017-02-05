@@ -4,14 +4,15 @@ using ScienceNewsAPI.Models;
 
 namespace ScienceNewsAPI.Data
 {
-    public class ScienceNewsDbContext : DbContext
+    public sealed class ScienceNewsDbContext : DbContext
     {
-        private IConfigurationRoot config;
+        private IConfigurationRoot _config;
 
         public ScienceNewsDbContext(DbContextOptions<ScienceNewsDbContext> options, IConfigurationRoot config) 
             : base (options)
         {
-            this.config = config;
+            _config = config;
+            Database.EnsureCreated();
         }
 
         public DbSet<Item> Items { get; set; }        

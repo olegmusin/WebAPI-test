@@ -1,5 +1,3 @@
-C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\bin\Debug\netcoreapp1.1\Microsoft.DiaSymReader.Native.x86.dll
-C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\bin\Debug\netcoreapp1.1\Microsoft.DiaSymReader.Native.amd64.dll
 C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\bin\Debug\netcoreapp1.1\ScienceNewsAPI.deps.json
 C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\bin\Debug\netcoreapp1.1\ScienceNewsAPI.runtimeconfig.json
 C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\bin\Debug\netcoreapp1.1\ScienceNewsAPI.runtimeconfig.dev.json

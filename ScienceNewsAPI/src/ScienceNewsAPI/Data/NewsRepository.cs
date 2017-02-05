@@ -27,13 +27,5 @@ namespace ScienceNewsAPI.Data
          => await GetAll()
                     .FirstOrDefaultAsync(i => i.Title.Contains(title));
 
-        public override IQueryable<Item> GetAll()
-         => base.GetAll()
-                    .Include(i => i.Thumbnail);
-
-        public override IQueryable<Item> FindBy(Expression<Func<Item, bool>> predicate)
-         => _context.Set<Item>()
-                    .Include(i => i.Thumbnail)
-                    .Where(predicate);
     }
 }

@@ -1,23 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using NuGet.Protocol.Core.v3;
 using ScienceNewsAPI.Data;
+using ScienceNewsAPI.Models;
 
 namespace ScienceNewsAPI.Controllers
 {
-    [Route("api/[controller]")]
-    public class FeedController : Controller
+    [Route("api/feed")]
+    public class FeedController : ApiController
     {
-        private ILogger<FeedController> _logger;
-        private NewsRepository _repo;
+        private readonly ILogger<FeedController> _logger;
+        private readonly NewsRepository _repo;
 
         public FeedController(NewsRepository repo, ILogger<FeedController> logger)
         {
@@ -25,9 +26,9 @@ namespace ScienceNewsAPI.Controllers
             _logger = logger;
         }
 
-        // GET api/feed/Index
-        [HttpGet]
-        public async Task<IActionResult> IndexAsync()
+        // GET api/feed/Search
+        [HttpGet("search")]
+        public async Task<IActionResult> Search()
         {
             try
             {
@@ -41,9 +42,9 @@ namespace ScienceNewsAPI.Controllers
             }
         }
 
-        // GET api/feed/Index/title
-        [HttpGet("{title}")]
-        public async Task<IActionResult> Index(string title)
+        // GET api/feed/Search/title
+        [HttpGet("search/{title}")]
+        public async Task<IActionResult> Search(string title)
         {
             try
             {
@@ -57,22 +58,62 @@ namespace ScienceNewsAPI.Controllers
             }
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
+        // POST api/feed/Index
+        [HttpPost("index")]
+        public async Task<IActionResult> Index([FromBody]Item item)
         {
+            //TODO: validate json schema
+            if (ModelState.IsValid)
+            {
+                _repo.Add(item);
+                if (await _repo.SaveChangesAsync())
+                {
+                    return Created($"New RSS item created successfully", item);
+                }
+            }
+            _logger.LogError($"Error saving item with id {item.Id} to database");
+            return BadRequest("Posting data failed!");
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        // PUT api/feed/index/5
+        [HttpPut("index/{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody]Item item)
         {
+            if (ModelState.IsValid)
+            {
+               var itemUpdate = await _repo.FindBy(i => i.Id == id).SingleAsync();
+
+                itemUpdate.Content = item.Content;
+                itemUpdate.Link = item.Link;
+                itemUpdate.PubDate = item.PubDate;
+                itemUpdate.Thumbnail = item.Thumbnail;
+                itemUpdate.Title = item.Title;
+                _repo.Edit(itemUpdate);
+
+                if (await _repo.SaveChangesAsync())
+                {
+                    return Ok($"RSS item with id {itemUpdate.Id} updated successfully");
+                }
+            }
+            _logger.LogError($"Error saving item with id {id} to database");
+            return BadRequest("Putting data failed!");
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // DELETE api/feed/search/5
+        [HttpDelete("search/{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
+            if (ModelState.IsValid)
+            {
+                var item = await _repo.FindBy(i => i.Id == id).SingleAsync();
+                _repo.Delete(item);
+                if (await _repo.SaveChangesAsync())
+                {
+                    return Ok($"RSS item with id {item.Id} deleted successfully");
+                }
+            }
+            _logger.LogError($"Error deleting item with id {id}");
+            return BadRequest("Failed to delete!");
         }
     }
 }

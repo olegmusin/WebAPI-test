@@ -27,8 +27,13 @@ namespace ScienceNewsAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton(Configuration);
+
+            services.AddTransient<NewsRepository>();
+            services.AddTransient<DbSeed>();
+
             services.AddDbContext<ScienceNewsDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddMvc().AddJsonOptions(config =>
             {
                 config.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
@@ -37,7 +42,7 @@ namespace ScienceNewsAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, DbSeed seeder)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -56,7 +61,9 @@ namespace ScienceNewsAPI
                 app.UseExceptionHandler("/Api/Error");
                 loggerFactory.AddDebug(LogLevel.Information);
             }
-            app.UseMvcWithDefaultRoute(); 
+            app.UseMvc();
+
+            seeder.EnsureSeedData().Wait();
         }
     }
 }

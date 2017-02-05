@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:57837/",
+      "applicationUrl": "http://localhost:62837/",
       "sslPort": 0
     }
   },
@@ -11,18 +11,15 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/values",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "ScienceNewsAPI": {
+    "newProfile1": {
+      "executablePath": "C:\\Repositories\\Workspaces\\WebAPI-test\\ScienceNewsAPI\\src\\ScienceNewsAPI\\bin\\Debug\\netcoreapp1.1\\ScienceNewsAPI.dll",
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:5000/api/values",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      "launchUrl": "http://localhost:5000"
     }
   }
 }
