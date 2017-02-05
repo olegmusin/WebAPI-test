@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using NuGet.Protocol.Core.v3;
 using ScienceNewsAPI.Data;
 using ScienceNewsAPI.Models;
 

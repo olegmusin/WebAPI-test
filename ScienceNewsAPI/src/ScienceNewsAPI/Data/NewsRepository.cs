@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using NuGet.Protocol.Core.v3;
 using ScienceNewsAPI.Data.Repository;
 using ScienceNewsAPI.Models;
 
