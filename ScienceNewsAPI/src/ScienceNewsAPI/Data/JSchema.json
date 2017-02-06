@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "title": { "type": "string" },
+    "content": { "type": "string" },
+    "link": { "type": "string" },
+    "pubDate": { "type": "date-time" },
+    "thumbnail": { "type": "string" }
+  }
+}

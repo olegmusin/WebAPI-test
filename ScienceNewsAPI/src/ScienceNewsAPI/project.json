@@ -1,4 +1,7 @@
 {
+  "title": "ScienceNewsAPI",
+  "copyright": "Oleg Musin. 2017",
+  "description": "RSS Feed Context Database",
   "buildOptions": {
     "emitEntryPoint": true,
     "preserveCompilationContext": true
@@ -37,7 +40,8 @@
       "type": "build"
     },
     "System.Linq.Expressions": "4.3.0",
-    "Microsoft.AspNetCore.Mvc.WebApiCompatShim": "1.0.1"
+    "Microsoft.AspNetCore.Mvc.WebApiCompatShim": "1.0.1",
+    "Newtonsoft.Json.Schema": "2.0.8"
   },
   "frameworks": {
     "netcoreapp1.1": {

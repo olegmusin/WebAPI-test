@@ -15,11 +15,13 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "newProfile1": {
-      "executablePath": "C:\\Repositories\\Workspaces\\WebAPI-test\\ScienceNewsAPI\\src\\ScienceNewsAPI\\bin\\Debug\\netcoreapp1.1\\ScienceNewsAPI.dll",
+    "ScienceNewsApi": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:5000"
+      "launchUrl": "http://localhost:5000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
     }
   }
 }

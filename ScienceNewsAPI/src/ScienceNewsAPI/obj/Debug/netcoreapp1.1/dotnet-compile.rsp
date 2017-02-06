@@ -1,5 +1,5 @@
---temp-output:C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\obj\Debug\netcoreapp1.1\
---out:C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\bin\Debug\netcoreapp1.1\ScienceNewsAPI.dll
+--temp-output:D:\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\obj\Debug\netcoreapp1.1\
+--out:D:\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\bin\Debug\netcoreapp1.1\ScienceNewsAPI.dll
 --define:DEBUG
 --define:TRACE
 --define:NETCOREAPP1_1
@@ -9,6 +9,9 @@
 --optimize:False
 --emit-entry-point:True
 --output-name:ScienceNewsAPI
+--title:ScienceNewsAPI
+--description:RSS Feed Context Database
+--copyright:Oleg Musin. 2017
 --file-version:1.0.0.0
 --version:1.0.0.0
 --informational-version:1.0.0
@@ -103,6 +106,7 @@
 --reference:C:\Users\olegy\.nuget\packages\Microsoft.Win32.Primitives\4.3.0\ref\netstandard1.3\Microsoft.Win32.Primitives.dll
 --reference:C:\Users\olegy\.nuget\packages\Microsoft.Win32.Registry\4.3.0\ref\netstandard1.3\Microsoft.Win32.Registry.dll
 --reference:C:\Users\olegy\.nuget\packages\Newtonsoft.Json\9.0.1\lib\netstandard1.0\Newtonsoft.Json.dll
+--reference:C:\Users\olegy\.nuget\packages\Newtonsoft.Json.Schema\2.0.8\lib\netstandard1.3\Newtonsoft.Json.Schema.dll
 --reference:C:\Users\olegy\.nuget\packages\NuGet.Common\3.5.0-beta2-1484\lib\netstandard1.3\NuGet.Common.dll
 --reference:C:\Users\olegy\.nuget\packages\NuGet.Configuration\3.5.0-beta2-1484\lib\netstandard1.3\NuGet.Configuration.dll
 --reference:C:\Users\olegy\.nuget\packages\NuGet.DependencyResolver.Core\3.5.0-beta2-1484\lib\netstandard1.3\NuGet.DependencyResolver.Core.dll
@@ -205,14 +209,15 @@
 --reference:C:\Users\olegy\.nuget\packages\System.Xml.ReaderWriter\4.3.0\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\olegy\.nuget\packages\System.Xml.XDocument\4.3.0\ref\netstandard1.3\System.Xml.XDocument.dll
 --reference:C:\Users\olegy\.nuget\packages\System.Xml.XmlSerializer\4.0.11\ref\netstandard1.3\System.Xml.XmlSerializer.dll
---resource:"C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\obj\Debug\netcoreapp1.1\ScienceNewsAPIdotnet-compile.deps.json",ScienceNewsAPI.deps.json
-C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Program.cs
-C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Startup.cs
-C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Controllers\FeedController.cs
-C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Data\DbSeed.cs
-C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Data\GenericRepository.cs
-C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Data\IGenericRepository.cs
-C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Data\NewsRepository.cs
-C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Data\ScienceNewsDbContext.cs
-C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Models\Error.cs
-C:\Repositories\Workspaces\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Models\Item.cs
+--resource:"D:\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\obj\Debug\netcoreapp1.1\ScienceNewsAPIdotnet-compile.deps.json",ScienceNewsAPI.deps.json
+D:\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Program.cs
+D:\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Startup.cs
+D:\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Controllers\FeedController.cs
+D:\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Data\DbSeed.cs
+D:\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Data\GenericRepository.cs
+D:\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Data\IGenericRepository.cs
+D:\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Data\NewsRepository.cs
+D:\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Data\ScienceNewsDbContext.cs
+D:\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Helpers\Validation.cs
+D:\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Models\Error.cs
+D:\WebAPI-test\ScienceNewsAPI\src\ScienceNewsAPI\Models\Item.cs
