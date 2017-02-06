@@ -1,13 +1,9 @@
 ﻿using ScienceNewsAPI.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Schema.Generation;
 using Newtonsoft.Json;
 using System.IO;
+using NuGet.Protocol.Core.v3;
 
 namespace ScienceNewsAPI.Helpers
 {
@@ -15,24 +11,17 @@ namespace ScienceNewsAPI.Helpers
     {
         public static Item Validate(object item)
         {
-            JSchemaGenerator generator = new JSchemaGenerator();
-            JSchema schema = generator.Generate(typeof(Item));
-
-            JsonTextReader reader = new JsonTextReader(new StringReader(item.ToString()));
-
-            JSchemaValidatingReader validatingReader = new JSchemaValidatingReader(reader);
-            validatingReader.Schema = schema;
+            var schema = JSchema.Parse(File.ReadAllText(@"..\ScienceNewsAPI\Data\JSchema.json"));
+            var reader = new JsonTextReader(new StringReader(item.ToJson()));
+            var validatingReader = new JSchemaValidatingReader(reader) {Schema = schema};
 
             IList<string> messages = new List<string>();
-            validatingReader.ValidationEventHandler += (o, a) => messages.Add(a.Message);
+            validatingReader.ValidationEventHandler += (o, e) => messages.Add(e.Message);
 
-            JsonSerializer serializer = new JsonSerializer();
-            Item i = serializer.Deserialize<Item>(validatingReader);
+            var serializer = new JsonSerializer();
+            var i = serializer.Deserialize<Item>(validatingReader);
 
-            if (messages.Count == 0)
-                return i;
-            else
-                return null;
+            return messages.Count == 0 ? i : null;
         }
     }
 }

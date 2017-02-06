@@ -1,10 +1,39 @@
 {
   "type": "object",
   "properties": {
-    "title": { "type": "string" },
-    "content": { "type": "string" },
-    "link": { "type": "string" },
-    "pubDate": { "type": "date-time" },
-    "thumbnail": { "type": "string" }
-  }
+    "id": {
+      "type": "integer",
+      "format": "int32",
+      "description": "id of a rss channel item in database"
+    },
+    "title": {
+      "type": "string",
+      "description": "RSS item title"
+    },
+    "link": {
+      "type": "string",
+      "description": "RSS item link"
+    },
+    "content": {
+      "type": "string",
+      "description": "Description of a news"
+    },
+    "pubDate": {
+      "type": "string",
+      "format": "dateTime",
+      "description": "Publication date"
+    },
+    "thumbnail": {
+      "type": "string",
+      "description": "image url"
+    }
+  },
+  "required": [
+    "title",
+    "link",
+    "content",
+    "pubDate",
+    "thumbnail"
+  ]
+
 }

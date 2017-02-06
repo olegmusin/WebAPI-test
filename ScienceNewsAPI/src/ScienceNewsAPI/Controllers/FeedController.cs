@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using NuGet.Packaging;
 using ScienceNewsAPI.Data;
 using ScienceNewsAPI.Models;
 using ScienceNewsAPI.Helpers;
@@ -56,15 +58,16 @@ namespace ScienceNewsAPI.Controllers
 
         // POST api/Index
         [HttpPost("index")]
-        public async Task<IActionResult> Index([FromBody]object body)
+        public async Task<IActionResult> Index([FromBody]object obj)
         {
-            var item = Validation.Validate(body);
-            if (item != null)
+            if (ModelState.IsValid)
             {
-                _repo.Add(item);
-                if (await _repo.SaveChangesAsync())
+                var item = Validation.Validate(obj);
+                if (item != null)
                 {
-                    return Created($"New RSS item created successfully", item);
+                    _repo.Add(item);
+                    if (await _repo.SaveChangesAsync())
+                        return Created($"New RSS item created successfully", item);
                 }
             }
             _logger.LogError($"Error saving item to database");
@@ -72,17 +75,21 @@ namespace ScienceNewsAPI.Controllers
         }
         // POST api/Index/addWithList
         [HttpPost("index/addWithList")]
-        public async Task<IActionResult> Index([FromBody]Item[] items)
+        public async Task<IActionResult> Index([FromBody]object[] array)
         {
-
             if (ModelState.IsValid)
             {
-                foreach (var item in items)
-                    _repo.Add(item);
-                if (await _repo.SaveChangesAsync())
+                var createdItems = new List<Item>();
+                foreach (var obj in array)
                 {
-                    return Created($"New RSS item list created successfully", items);
+                    var item = Validation.Validate(obj);
+                    if (item == null) continue;
+                    _repo.Add(item);
+                    createdItems.Add(item);
                 }
+
+                if (await _repo.SaveChangesAsync())
+                    return Created($"{createdItems.Count} of {array.Length} items created successfully", createdItems);
             }
             _logger.LogError($"Error saving items to database");
             return BadRequest("Posting list of data failed!");
@@ -90,7 +97,7 @@ namespace ScienceNewsAPI.Controllers
 
         // PUT api/index/5
         [HttpPut("index/{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody]Item item)
+        public async Task<IActionResult> Put(int id, [FromBody] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -104,9 +111,7 @@ namespace ScienceNewsAPI.Controllers
                 _repo.Edit(itemUpdate);
 
                 if (await _repo.SaveChangesAsync())
-                {
                     return Ok($"RSS item with id {itemUpdate.Id} updated successfully");
-                }
             }
             _logger.LogError($"Error saving item with id {id} to database");
             return BadRequest("Putting data failed!");
@@ -130,9 +135,7 @@ namespace ScienceNewsAPI.Controllers
                 }
 
                 if (await _repo.SaveChangesAsync())
-                {
                     return Ok($"RSS item with id {id} deleted successfully");
-                }
             }
             _logger.LogError($"Error deleting item with id {id}");
             return BadRequest("Failed to delete!");
