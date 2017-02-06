@@ -5,10 +5,9 @@ using System.Web.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using NuGet.Packaging;
 using ScienceNewsAPI.Data;
-using ScienceNewsAPI.Models;
 using ScienceNewsAPI.Helpers;
+using ScienceNewsAPI.Models;
 
 namespace ScienceNewsAPI.Controllers
 {
@@ -31,12 +30,12 @@ namespace ScienceNewsAPI.Controllers
             try
             {
                 var links = _repo.GetAll();
-                return Ok(await links.ToListAsync()); // 200 response
+                return Ok(await links.ToListAsync()); 
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Failed to get all links: {ex.Message}");
-                return new ExceptionResult(ex, true) { StatusCode = 204 };
+                return new ExceptionResult(ex, true) {StatusCode = 204};
             }
         }
 
@@ -52,13 +51,13 @@ namespace ScienceNewsAPI.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Failed to get link with title contains {str} due to: {ex.Message}");
-                return new ExceptionResult(ex, true) { StatusCode = 204 };
+                return new ExceptionResult(ex, true) {StatusCode = 204};
             }
         }
 
         // POST api/Index
         [HttpPost("index")]
-        public async Task<IActionResult> Index([FromBody]object obj)
+        public async Task<IActionResult> Index([FromBody] object obj)
         {
             if (ModelState.IsValid)
             {
@@ -67,15 +66,16 @@ namespace ScienceNewsAPI.Controllers
                 {
                     _repo.Add(item);
                     if (await _repo.SaveChangesAsync())
-                        return Created($"New RSS item created successfully", item);
+                        return new JsonResult(item) {StatusCode = 201};
                 }
             }
             _logger.LogError($"Error saving item to database");
             return BadRequest("Posting data failed!");
         }
+
         // POST api/Index/addWithList
         [HttpPost("index/addWithList")]
-        public async Task<IActionResult> Index([FromBody]object[] array)
+        public async Task<IActionResult> Index([FromBody] object[] array)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,12 @@ namespace ScienceNewsAPI.Controllers
                 }
 
                 if (await _repo.SaveChangesAsync())
-                    return Created($"{createdItems.Count} of {array.Length} items created successfully", createdItems);
+                    return Json(
+                        new
+                        {
+                            message = $"{createdItems.Count} of {array.Length} items created successfully",
+                            createdItems
+                        });
             }
             _logger.LogError($"Error saving items to database");
             return BadRequest("Posting list of data failed!");
@@ -140,9 +145,10 @@ namespace ScienceNewsAPI.Controllers
             _logger.LogError($"Error deleting item with id {id}");
             return BadRequest("Failed to delete!");
         }
+
         // DELETE api/search/deleteWithList
         [HttpDelete("search/deleteWithList")]
-        public async Task<IActionResult> Delete([FromBody]int[] ids)
+        public async Task<IActionResult> Delete([FromBody] int[] ids)
         {
             if (ModelState.IsValid)
             {
@@ -160,9 +166,7 @@ namespace ScienceNewsAPI.Controllers
                     return BadRequest("Failed to delete!");
                 }
                 if (await _repo.SaveChangesAsync())
-                {
                     return Ok($"RSS items list deleted successfully");
-                }
             }
             _logger.LogError($"Error deleting items");
             return BadRequest("Failed to delete!");
